@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+body {background:url("../img/inc/bg01.jpg") no-repeat center top;}
+#body_head {clear:both; height:500px; padding:200px 0px 0px 0px;}
+#body_head h2 {font-family: 'GmarketSansMedium'; font-size:60px; color:#ffffff; text-align:center;}
+#body_head .location {color:#ffffff; text-align:center;}
+#body_head .location span {color:#ffffff; font-weight:bold;}
+#submenu {height:120px; padding:0px 50px 0px 50px;}
+#submenu ul {height:119px; text-align:center; border-bottom:1px solid #dcdcdc;}
+#submenu li {display:inline-block;}
+#submenu li a {display:block; font-size:20px; height:120px; padding:50px 30px;}
+#submenu .on a {font-weight:bold; border-bottom:3px solid #0d6efd; color:#0d6efd;}
+#wrap {width:1200px; background:rgba(255, 255, 255, 1.0); margin:0px auto;}
+#body_contents {min-height:600px; padding:120px 0px 120px 0px;}

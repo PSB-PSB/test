@@ -1,0 +1,43 @@
+@charset "UTF-8";
+
+.category {padding:0px 0px 40px 0px;}
+.state {font-weight:bold;}
+.state.type00 {color:#dc3545;} /* 결제 대기 */
+.state.type01 {color:#cc9a06;} /* 결제 완료 */
+.state.type02 {color:#198754;} /* 출고 대기 */
+.state.type03 {color:#0d6efd;} /* 출고 완료 */
+.state.type04 {color:#889097;} /* 반납 완료 */
+
+th.state {border:1px solid #dcdcdc; font-weight:normal;}
+th.state.type00 {background:#f8d7da; border-color:#f1aeb5;}
+th.state.type01 {background:#fff3cd; border-color:#ffe69c;}
+th.state.type02 {background:#d1e7dd; border-color:#a3cfbb;}
+th.state.type03 {background:#cbddf7; border-color:#a1bbe1;}
+th.state.type04 {background:#e2e3e5;}
+th.state span {font-weight:bold !important;}
+
+.board_list thead th {font-weight:bold;}
+.board_list td span {color:#c8c8c8; font-size:12px; position:relative; top:-2px;}
+
+.calendar h3 {text-align:center; padding:0px 0px 60px 0px;}
+.calendar th, .calendar td {text-align:center;}
+.calendar tbody p {padding:10px 0px 10px 0px;}
+.calendar .d-grid {min-height:240px;}
+
+.board_write .input-group {margin:0px 0px 10px 0px;}
+.board_write .input-group-text {width:200px; text-align:center;}
+.daterangepicker td.off {color:#dcdcdc;}
+.daterangepicker .calendar-table th:nth-last-child(1){color:#0060ef;}
+.daterangepicker .calendar-table tbody tr td:nth-last-child(1){color:#0060ef;}
+.daterangepicker .calendar-table th:nth-child(1){color:#ff0000;}
+.daterangepicker .calendar-table tbody tr td:nth-child(1){color:#ff0000;}
+.daterangepicker tbody tr td.disabled {text-decoration:none; color:#dcdcdc !important;}
+
+.board_bot {padding:25px 0px 0px 0px;}
+.board_bot nav {}
+.board_bot div {text-align:right; margin:-38px 0px 0px 0px;}
+.search {padding:40px 0px 0px 0px;}
+
+.pagination li {cursor:pointer;}
+
+.board_view a.btn {color:#ffffff;}

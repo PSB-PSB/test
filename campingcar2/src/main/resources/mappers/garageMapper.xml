@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.ccrent.mapper.GarageDAO">
+
+	<!-- 정비소 검색조건에 해당하는 페이지조회 -->
+	<select id="garage_select"
+		resultType="kr.co.ccrent.dto.GarageDTO">
+ 		<![CDATA[
+ 		select 	*
+		from	campingcar.garage
+		where 	garage_state > 0 and garage_name like CONCAT('%',#{keyword},'%') || garage_addr like CONCAT('%',#{keyword},'%')
+ 		limit #{pageStart},#{perPageNum}
+ 		]]>
+	</select>
+
+	<!-- 정비소 검색조건에 해당하는 전체 게시물 수 조회 -->
+	<select id="garage_select_count" resultType="int">
+		<![CDATA[
+		select 	count(garage_state)
+		from 	garage
+		where 	garage_state >0 and garage_name like CONCAT('%',#{keyword},'%')|| garage_addr like CONCAT('%',#{keyword},'%')
+		]]>
+	</select>
+
+	<!-- 정비소 리스트 -->
+	<select id="garage_select_all"
+		resultType="kr.co.ccrent.dto.GarageDTO">
+ 			<![CDATA[
+ 			select garage_no, garage_name, garage_addr, garage_phone, garage_state, garage_code
+ 			from garage
+ 			where garage_state>0
+ 			limit #{pageStart},#{perPageNum}
+ 			]]>
+	</select>
+	<!-- 정비소 전체리스트 카운트 -->
+	<select id="garage_select_allcount" resultType="int">
+	 		<![CDATA[
+	 		select count(garage_state)
+	 		from garage
+	 		where garage_state > 0
+	 		]]>
+	</select>
+
+	<!-- 정비소 등록신청 -->
+	<insert id="garage_insert"
+		parameterType="kr.co.ccrent.dto.GarageDTO">
+		insert into garage(garage_name, garage_addr,garage_phone,garage_state, garage_code,state_modify)
+		values(#{garage_name},#{garage_addr}, #{garage_phone}, #{garage_state},#{garage_code},#{state_modify})
+	</insert>
+
+
+
+	<!-- 정비소등록신청 리스트 -->
+	<select id="garage_select_reg"
+		resultType="kr.co.ccrent.dto.GarageDTO">
+		<![CDATA[
+		select *
+		from garage
+		where state_modify = 0
+ 		limit #{pageStart},#{perPageNum}
+		]]>
+	</select>
+
+	<!-- 정비소 등록신청 리스트 카운트 -->
+	<select id="garage_select_regcount" resultType="int">
+	 		<![CDATA[
+	 		select count(state_modify)
+	 		from garage
+	 		where state_modify = 0
+	 		]]>
+	</select>
+
+	<!-- 정비소 등록승인(관리자) -->
+	<update id="garage_insert_admin" parameterType="kr.co.ccrent.dto.GarageDTO">
+		update garage		
+		set state_modify= 1
+		where garage_no	= #{garage_no}
+	</update>
+
+	<!-- 정비소 정보 수정 -->
+	<update id="garage_update"	parameterType="kr.co.ccrent.dto.GarageDTO">
+		update garage
+		set garage_name=#{garage_name},	garage_addr=#{garage_addr},	garage_phone=#{garage_phone},
+		garage_state=#{garage_state},	garage_code=#{garage_code}
+		where garage_no	= #{garage_no}
+	</update>
+		<!-- 정비소 등록승인(no가져오기(정비소 정보수정이랑 이어지는 쿼리문)) -->
+	<select id="garage_update_select"	parameterType="java.lang.Integer"	resultType="kr.co.ccrent.dto.GarageDTO">
+		select *
+		from garage
+		where garage_no = #{garage_no}
+	</select>
+	
+	<!-- 정비소 정보 삭제 -->
+	<delete id="garage_delete" parameterType="java.lang.Integer">
+		delete from
+		garage
+		where garage_no = #{garage_no}
+	</delete>
+
+</mapper>
+

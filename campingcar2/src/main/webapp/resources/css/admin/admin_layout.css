@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+body {margin:0; padding:0; background:#f0f0f0;}
+table {background:#ffffff;}
+
+/* 레이아웃 */
+#container {position:relative;}
+#topmenu {height:50px; width:2000px; background:#ffffff; position:fixed; padding:0px 0px 0px 300px; border-bottom:1px solid #dcdcdc; z-index:999998;}
+#sidebar {background:#343a40; min-height:1080px; width:250px; position:fixed; top:0; left:0; padding:10px; z-index:999999;}
+#wrap {padding:110px 60px 60px 300px;}
+
+/* 탑메뉴 */
+#topmenu h2 {font-weight:bold; font-size:20px; padding:10px 0px 0px 0px;}
+
+/* 사이드 바*/
+#sidebar h1 {text-align:center; font-size:1em; color:#ffffff; padding:30px 0px 30px 0px;}
+#sidebar h1 p {padding:10px 0px 0px 0px;}
+#sidebar li {margin:5px 0px 0px 0px;}
+#sidebar li a {display:block; padding:10px; border:1px solid #4c5864; color:#ffffff; border-radius:5px;}
+#sidebar li li {margin:0;}
+#sidebar li li a {border:none; padding:15px 0px 0px 30px;}
+#sidebar li ul {padding:0px 0px 15px 0px;}

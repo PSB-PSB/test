@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.ccrent.mapper.CarMapper">
+
+	<select id="selectTime" resultType="String">
+		select now()
+	</select>
+	
+	<insert id="insert" parameterType="kr.co.ccrent.domain.CarVO">
+		insert into car (car_rentcompid, car_modelname, car_name, car_number, car_capa, car_option, car_detail, car_rentprice, car_regdate, car_file) 
+		values (#{car_rentcompid}, #{car_modelname}, #{car_name}, #{car_number}, #{car_capa}, #{car_option}, #{car_detail}, #{car_rentprice}, now(), #{car_file})
+	</insert>
+
+	<update id="update" parameterType="kr.co.ccrent.domain.CarVO">
+		update car set car_rentcompid=#{car_rentcompid}, car_modelname=#{car_modelname}, car_name=#{car_name}, car_number=#{car_number}, car_capa=#{car_capa}, car_option=#{car_option}, car_detail=#{car_detail}, car_rentprice=#{car_rentprice}, car_file=#{car_file} where car_regid=#{car_regid}
+	</update>
+	
+	<delete id="delete">
+		delete from car where car_regid = #{car_regid} 
+	</delete>
+	
+	<select id="selectAll" resultType="kr.co.ccrent.domain.CarVO">
+		select * from car order by car_regid
+	</select>
+
+	<!-- 검색 처리 -->
+	<sql id="search">
+		<where>
+		<if test="types != null and types.length > 0">
+			<foreach collection="types" item="type" open="(" close=")" separator=" OR ">
+				<if test="type=='car_name'.toString()">
+					car_name like concat('%', #{keyword}, '%')
+				</if>
+				<if test="type=='car_modelname'.toString()">
+					car_modelname like concat('%', #{keyword}, '%')
+				</if>				
+			</foreach>
+		</if>
+		</where>	
+	</sql>
+	<select id="selectList" resultType="kr.co.ccrent.domain.CarVO">
+		select * from car
+		<include refid="search"></include>
+		order by car_regid desc limit #{skip}, #{size}
+	</select>
+
+	
+	<select id="selectCount" resultType="int">
+		select count(car_regid) from car
+	</select>		
+	
+	<select id="selectOne" resultType="kr.co.ccrent.domain.CarVO">
+		select * from car where car_regid = #{car_regid}
+	</select>
+	
+	<select id="selectMaxId" resultType="int">
+		select MAX(car_regid) from car
+	</select>
+	
+</mapper>

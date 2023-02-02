@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.ccrent.mapper.CarUserDAO">
+
+
+	<select id="selectTime" resultType="String">
+		select now()
+	</select>
+ 
+ 
+	<!-- 회원가입 -->
+	<insert id="insert" parameterType="kr.co.ccrent.dto.CarUserDTO">
+		insert into usercumstomers
+		(`car_udriverid`, `car_uid`, `car_upw`, `car_uyear`, `car_uname`,
+		`car_uaddr`, `car_uemail`, `car_uphone`, `car_upoint`, `car_pdate`,
+		`car_ptype`)
+		value (#{car_udriverid}, #{car_uid}, #{car_upw}, #{car_uyear},
+		#{car_uname}, #{car_uaddr}, #{car_uemail}, #{car_uphone},
+		#{car_upoint}, curdate(), #{car_ptype})
+	</insert>
+ 
+	<!-- 로그인 -->
+	<select id="login" resultType="kr.co.ccrent.dto.CarUserDTO">
+		select * from
+		usercumstomers
+		where car_uid = #{car_uid} and car_upw = #{car_upw}
+	</select>
+   
+	<!-- 내림차순 정렬 -->
+	<select id="select" resultType="kr.co.ccrent.dto.CarUserDTO">
+		select * from usercumstomers
+		order by car_uno desc;
+	</select>
+
+  
+	<!-- 회원상세정보 -->
+	<select id="detail" resultType="kr.co.ccrent.dto.CarUserDTO">
+		select *
+		from usercumstomers
+		where car_uno = #{car_uno}
+	</select>
+
+
+	<!-- 회원탈퇴 -->
+	<delete id="delete" parameterType="java.lang.Integer">
+		delete from
+		usercumstomers
+		where car_uno = #{car_uno}
+	</delete>
+
+	
+	
+	
+     <!-- 총 갯수 -->
+	<select id="listPage_count" resultType="int">
+          <![CDATA[
+          select count(car_uno) from usercumstomers;
+          ]]>
+   </select>
+   
+	<!-- 게시물 목록 + 페이징 -->
+   <select id="listPage"
+      resultType="kr.co.ccrent.dto.CarUserDTO">
+      <![CDATA[
+      select *
+		from usercumstomers
+		order by car_uno desc
+       limit #{pageStart},#{perPageNum}
+      ]]>
+   </select>
+   
+   <!-- 검색조건에 해당하는 페이지조회 -->
+   <select id="user_se"
+      resultType="kr.co.ccrent.dto.CarUserDTO">
+       <![CDATA[
+       select    *
+      from  usercumstomers
+      where    car_uname like CONCAT('%',#{keyword},'%') || car_udriverid like CONCAT('%',#{keyword},'%')
+       limit #{pageStart},#{perPageNum}
+       ]]>
+   </select>
+
+   <!-- 검색조건에 해당하는 전체 게시물 수 조회 -->
+   <select id="user_se_count" resultType="int">
+      <![CDATA[
+      select    count(car_uno)
+      from    usercumstomers
+      where    car_uname like CONCAT('%',#{keyword},'%') || car_udriverid like CONCAT('%',#{keyword},'%')
+      ]]>
+   </select>
+
+	<!-- 회원정보 수정 or 강제수정 -->
+	<update id="update" parameterType="kr.co.ccrent.dto.CarUserDTO">
+		update usercumstomers
+		set 
+		car_udriverid=#{car_udriverid}, car_uid=#{car_uid}, car_upw=#{car_upw}, car_uname=#{car_uname}, car_uyear=#{car_uyear}, car_uaddr=#{car_uaddr},
+		car_uemail=#{car_uemail}, car_uphone=#{car_uphone}, car_ptype=#{car_ptype}
+		where car_uno = #{car_uno}
+	</update>
+
+	<!-- 아이디 중복 체크 -->
+	<select id="idCheck" resultType="int">
+		select count(*) from usercumstomers where car_uid = #{car_uid}
+	</select>
+	
+</mapper>

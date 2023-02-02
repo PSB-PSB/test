@@ -1,0 +1,13 @@
+@charset "UTF-8";
+
+#header_outer {border-bottom:1px solid rgba(255, 255, 255, 0.2);}
+#header {width:1200px; margin:0px auto; height:140px;}
+#header a {color:#ffffff;}
+#header #gnb {height:40px; text-align:right; padding:10px 0px 0px 0px;}
+#header #gnb a {color:rgba(255, 255, 255, 0.6);}
+#header h1 {width:300px; float:left; height:100px;}
+#header #topmenu {width:900px; float:left; height:100px;}
+#header #topmenu ul {float:right;}
+#header #topmenu ul li {float:left;}
+#header #topmenu ul li a {display:block; padding:40px 25px 40px 25px; font-size:18px;}
+#header #topmenu ul li:nth-last-child(1) a{padding-right:0;}

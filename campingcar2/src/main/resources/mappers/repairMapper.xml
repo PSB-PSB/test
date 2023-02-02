@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.ccrent.mapper.RepairDAO">
+ 	<!-- 정비내역 상세보기 (캠핑카id 가져오기) -->
+	<select id="repair_select"	parameterType="java.lang.Integer"	resultType="kr.co.ccrent.dto.RepairDTO">
+		select *
+		from car_reinfo
+		where car_regid =#{car_regid}
+	
+	</select>
+ 
+	<!-- 정비내역 작성 -->
+	<insert id="repair_insert"
+		parameterType="kr.co.ccrent.dto.RepairDTO">
+		insert into car_reinfo(car_regid,garage_name, comp_name,repair_info,
+								 repair_date,repair_price,repair_addinfo)
+		values(#{car_regid},#{garage_name}, #{comp_name}, #{repair_info},
+		curdate(),#{repair_price},#{repair_addinfo})
+	</insert>
+	
+ 	<!-- 정비내역 삭제 -->
+	<delete id="repair_delete" parameterType="java.lang.Integer">
+		delete from	car_reinfo
+		where car_regid = #{car_regid}		
+	</delete>
+	
+	<!-- 정비내역 정보 수정 -->
+	<update id="repair_update"	parameterType="kr.co.ccrent.dto.RepairDTO">
+	<![CDATA[
+		update car_reinfo
+		set garage_name=#{garage_name}, comp_name=#{comp_name}, 
+		repair_info=#{repair_info},repair_date=#{repair_date},repair_price=#{repair_price},
+		repair_addinfo=#{repair_addinfo}
+		where car_regid	= #{car_regid}
+		]]>
+	</update>
+	
+ 
+</mapper>
+
