@@ -19,7 +19,7 @@
 			$("#cencle").on("click", function(){
 			location.href = "${contextPath }/";
 			})
-		        
+		         
             //아이디 유효성검사
 			$("#join").on("click", function(){
 				if($("#car_uid").val()==""){
